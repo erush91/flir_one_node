@@ -7,7 +7,7 @@ the node publish :
 - 16bit IR stream
 - 8bit IR rescaled stream
 
-
+Development at the Urban competition.
 
 
 
