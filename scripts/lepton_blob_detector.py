@@ -110,6 +110,9 @@ def main():
           data = q.get(True, 500)
           if data is None:
             break
+          
+          img_raw = data
+          
           data = cv2.resize(data[:,:], (640, 480))
           minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(data)
           img = raw_to_8bit(data)
@@ -184,6 +187,7 @@ def main():
           display_temperature(img_with_keypoints, maxVal, maxLoc, (0, 0, 255))
 
           # image_lepton_data_pub = rospy.Publisher("lepton_data",Float32MultiArray)
+          image_lepton_raw_pub = rospy.Publisher("lepton_raw",Image)
           image_lepton_viz_pub = rospy.Publisher("lepton_viz",Image)
           image_lepton_viz_annoted_pub = rospy.Publisher("lepton_viz_annotated",Image)
 
@@ -201,6 +205,7 @@ def main():
           # data_msg.data = data
           
           # image_lepton_data_pub.publish(data)
+          image_lepton_raw_pub.publish(CvBridge().cv2_to_imgmsg(img_raw, "mono16"))
           image_lepton_viz_pub.publish(CvBridge().cv2_to_imgmsg(img, "rgb8"))
           image_lepton_viz_annoted_pub.publish(CvBridge().cv2_to_imgmsg(img_with_keypoints, "rgb8"))
                 
