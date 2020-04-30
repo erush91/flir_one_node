@@ -1,4 +1,4 @@
-# A simple node for flir one camera on linux
+# A simple node for flir lepton 3.5 thermal camera on linux
 
 install udev rules and enjoy
 
